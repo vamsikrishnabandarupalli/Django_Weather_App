@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #9898ee;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            margin: 50px auto;
+            width: 50%;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        input, button {
+            padding: 10px;
+            margin: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        #weather-info {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Weather App</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <input type="text" name="city" placeholder="Enter city name">
+            <button type="submit">Get Weather</button>
+        </form>
+
+        {% if city and description and temperature and pressure and humidity and weather %}
+            <div id="weather-info">
+                <h2>Weather in {{ city }}</h2>
+                <p><strong>Description:</strong> {{ description}}</p>
+                <p><strong>Temperature:</strong> {{ temperature }}°C</p>
+                <p><strong>Pressure:</strong> {{ pressure }} hPa</p>
+                <p><strong>Humidity:</strong> {{ humidity }}%</p>
+                <p><strong>Weather:</strong> {{ weather }}</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
